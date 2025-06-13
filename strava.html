@@ -28,6 +28,22 @@
 <body>
   <h1>Connect Your Strava Account</h1>
   <p>Click the button below to authorize Coach to track your runs.</p>
-  <a class="button" href="https://www.strava.com/oauth/authorize?client_id=162501&response_type=code&redirect_uri=https%3A%2F%2Fscript.google.com%2Fmacros%2Fs%2FAKfycbydlspzNQPaWOZGmUJne4EmFs9TU-x_NGWTZoL4m8tmLsEVfEMVLP5nuaPQ6ulc9pw%2Fexec&scope=activity:read_all&state=123984747&approval_prompt=auto">Connect with Strava</a>
+
+  <script>
+    // Read athleteId from query string (e.g. ?athlete=12345)
+    const urlParams = new URLSearchParams(window.location.search);
+    const athleteId = urlParams.get("athlete") || "25984193"; // fallback default
+
+    const stravaUrl = `https://www.strava.com/oauth/authorize` +
+      `?client_id=162501` +
+      `&response_type=code` +
+      `&redirect_uri=${encodeURIComponent("https://script.google.com/macros/s/AKfycbydlspzNQPaWOZGmUJne4EmFs9TU-x_NGWTZoL4m8tmLsEVfEMVLP5nuaPQ6ulc9pw/exec")}` +
+      `&scope=activity:read_all` +
+      `&state=${encodeURIComponent(athleteId)}` +
+      `&approval_prompt=auto`;
+
+    document.write(`<a class="button" href="${stravaUrl}">Connect with Strava</a>`);
+  </script>
 </body>
 </html>
+
